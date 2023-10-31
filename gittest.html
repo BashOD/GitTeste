@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spinning 3D Cube</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cube-container {
+    perspective: 1000px;
+  }
+
+  .cube {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transform-origin: center center;
+  }
+
+  .face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #000;
+    text-align: center;
+    line-height: 100px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .front { transform: translateZ(50px); }
+  .back { transform: rotateY(180deg) translateZ(50px); }
+  .right { transform: rotateY(90deg) translateZ(50px); }
+  .left { transform: rotateY(-90deg) translateZ(50px); }
+  .top { transform: rotateX(90deg) translateZ(50px); }
+  .bottom { transform: rotateX(-90deg) translateZ(50px); }
+</style>
+</head>
+<body>
+  <div class="cube-container">
+    <div class="cube" id="cube">
+      <div class="face front" style="background: rgba(255, 0, 0, 0.7);">Front</div>
+      <div class="face back" style="background: rgba(255, 242, 0, 0.7);">Back</div>
+      <div class="face right" style="background: rgba(64, 255, 0, 0.7);">Right</div>
+      <div class="face left" style="background: rgba(0, 255, 234, 0.7);">Left</div>
+      <div class="face top" style="background: rgba(119, 0, 255, 0.7);">Top</div>
+      <div class="face bottom" style="background: rgba(255, 0, 132, 0.7);">Bottom</div>
+    </div>
+  </div>
+
+  <script>
+    let cube = document.getElementById('cube');
+    let angleX = 0;
+    let angleY = 0;
+
+    function rotateCube() {
+      angleX += 1;
+      angleY += 1;
+      cube.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+      requestAnimationFrame(rotateCube);
+    }
+
+    rotateCube();
+  </script>
+</body>
+</html>
